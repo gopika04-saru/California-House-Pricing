@@ -1,41 +1,91 @@
 <!DOCTYPE html>
-<html >
-
+<html>
 <head>
   <meta charset="UTF-8">
   <title>ML API</title>
   <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-
-  
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <style>
+    body {
+      font-family: 'Arimo', sans-serif;
+      /* background: url('backGround.jpg') no-repeat center center fixed; */
+      background: url("{{ url_for('static', filename='backGround.jpg') }}") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .login {
+      background: rgba(255, 255, 255, 0.2);
+      width: 500px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+    h1 {
+      font-family: 'Courier New', monospace;
+      font-weight: 60px;
+      color: #fff;
+    }
+    input[type="text"] {
+      color: #8B5A2B;
+      font-weight: 20px;
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.3);
+      font-family: 'Courier New', monospace;
+    }
+    button {
+      background: #8B5A2B;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-family: 'Courier New', monospace;
+      font-weight: 40px;
+      box-shadow: 0px 4px 6px rgba(255, 255, 255, 0.3);
+    }
+    button:hover {
+        background: #A0522D;
+    }
+    .prediction-text {
+      margin-top: 20px;
+      font-size: 18px;
+      font-family: 'Courier New', monospace;
+      font-weight: 30px;
+      font-weight: bold;
+      color: #fff;
+    }
+  </style>
 </head>
-
-    <body>
+<body>
     <div class="login">
-	<h1>Boston House Price Prediction</h1>
-
-     <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict')}}"method="post">
-      <input type="text" name="MEDINC" placeholder="MEDINC" required="required" /><br>
-    	<input type="text" name="HOUSEAGE" placeholder="HOUSEAGE" required="required" /><br>
+      <h1>California House Price Prediction</h1>
+      <form action="{{ url_for('predict')}}" method="post">
+        <input type="text" name="MEDINC" placeholder="MEDINC" required="required" /><br>
+        <input type="text" name="HOUSEAGE" placeholder="HOUSEAGE" required="required" /><br>
         <input type="text" name="AVEROOMS" placeholder="AVEROOMS" required="required" /><br>
         <input type="text" name="AVEBEDRMS" placeholder="AVEBEDRMS" required="required" /><br>
         <input type="text" name="POPULATION" placeholder="POPULATION" required="required" /><br>
         <input type="text" name="AVEOCCUP" placeholder="AVEOCCUP" required="required" /><br>
         <input type="text" name="LATITUDE" placeholder="LATITUDE" required="required" /><br>
         <input type="text" name="LONGITUDE" placeholder="LONGITUDE" required="required" /><br>
-
-        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
-    </form>
-
-    <br>
-    <br>
-  
-   
+        <button type="submit">Predict</button>
+      </form>
+      <br>
+      <div class='prediction-text'>{{prediction_text}}</div>
     </div>
-    {{prediction_text}}
-
 </body>
 </html>
